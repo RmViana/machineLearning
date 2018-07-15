@@ -16,5 +16,11 @@ Y = dataset.iloc[:, 3].values
 
 # Taking care of the missing data
 from sklearn.preprocessing import Imputer
-imputer = Imputer(missing_values = 'Nan', strategy = 'mean', axis = 0)
-imputer.fit(X)
+imputer = Imputer(missing_values = 'NaN', strategy = 'mean', axis = 0)
+imputer = imputer.fit(X[:, 1:3])
+X[:, 1:3] = imputer.tranform(X[:, 1:3])
+
+# Encoding categorical data
+from sklearn.preprocessing import LabelEncoder
+labelencoder_X = LabelEncoder()
+labelencoder_X.fit_transform(X[:, 0])
